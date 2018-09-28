@@ -19,7 +19,6 @@ public class BasketCucumberTest extends BaseCucumberTest {
   /**
    * TODO 06 Uncomment the following methods, so they can be used as Step Definitions. Try running your test again after.
    */
-/*
   @When("^the user creates a new Basket$")
   public void theUserCreatesANewBasket() {
     userBasketManagement.createNewBasket();
@@ -27,10 +26,11 @@ public class BasketCucumberTest extends BaseCucumberTest {
 
   @Then("^the total number of items in the Basket with id (\\d+) equals (\\d+)$")
   public void theTotalNumberOfItemsInTheBasketWithIdEquals(int basketId, int totalNumber) {
-    assertThat(userBasketManagement.retrieveListOfAllTapasOrdersInBasket(basketId).stream().map(to -> to.getAmount()).reduce(0L, Long::sum))
+    assertThat(userBasketManagement.retrieveListOfAllTapasOrdersInBasket(basketId).stream()
+        .map(TapasOrder::getAmount)
+        .reduce(0L, Long::sum))
         .isEqualTo(totalNumber);
   }
-*/
 
   @After
   public void clear() {
