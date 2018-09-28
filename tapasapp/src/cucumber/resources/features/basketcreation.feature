@@ -18,11 +18,15 @@ Feature: A new empty basket can be created and filled with Tapas
     And the user adds 5 tapas with id 3 to the basket with id 1
     Then the total number of items in the basket with id 1 equals 5
     And the total number of items with id 3 in the basket with id 1 equals 5
+
   # TODO 08 Add a scenario where we add several Tapas to the basket, and try to count the total number of items in the Basket
-  # Hint: it's possible the API makes it a bit harder to verify the total, this means you might need to use a little bit of extra Java code
-
-  #Scenario: Client can add several Tapas to his Basket
-
+  
+  Scenario: Client can add several Tapas to his Basket
+    When the user creates a new Basket
+    And the user adds 3 tapas with id 1 to the basket with id 1
+    And the user adds 2 tapas with id 2 to the basket with id 1
+    And the user adds 5 tapas with id 3 to the basket with id 1
+    Then the total number of items in the basket with id 1 equals 10
 
   # TODO 09 (EXTRA) Create a scenario where you add a couple of Tapas to the Basket and Calculate the Total Cost of it
   #Scenario: Client can Calculate a Total Cost for all the Tapas in his Basket
