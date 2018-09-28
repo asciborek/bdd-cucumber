@@ -12,17 +12,12 @@ Feature: A new empty basket can be created and filled with Tapas
     Then the total number of items in the Basket with id 1 equals 0
 
   # TODO 07 Add a scenario where we verify whether the Client can add a Tapas to his Basket.
-  # We want our test to verify that:
-  # When the user creates a new Basket
-  # And the user adds 5 Tapas with id 3 to the Basket with id 1
-  # Then the number of items with id 3 in the basket with id 1 equals 5
-  # And the total number of items in the basket with id 1 equals 5
-  #
-  # In your step definitions file you can annotate steps with @When and @Then like you would for other steps but also use them with "and"  in your feature files
 
-  #Scenario: Client can add a Tapas to his Basket
-
-
+  Scenario: Client can add a Tapas to his Basket
+    When the user creates a new Basket
+    And the user adds 5 tapas with id 3 to the basket with id 1
+    Then the total number of items in the basket with id 1 equals 5
+    And the total number of items with id 3 in the basket with id 1 equals 5
   # TODO 08 Add a scenario where we add several Tapas to the basket, and try to count the total number of items in the Basket
   # Hint: it's possible the API makes it a bit harder to verify the total, this means you might need to use a little bit of extra Java code
 

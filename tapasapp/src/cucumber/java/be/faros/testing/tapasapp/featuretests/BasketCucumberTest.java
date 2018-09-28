@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import be.faros.testing.tapasapp.BaseCucumberTest;
 import be.faros.testing.tapasapp.store.domain.usecases.dto.TapasOrder;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.math.BigDecimal;
@@ -24,12 +25,25 @@ public class BasketCucumberTest extends BaseCucumberTest {
     userBasketManagement.createNewBasket();
   }
 
-  @Then("^the total number of items in the Basket with id (\\d+) equals (\\d+)$")
+  @And("^the user adds (\\d+) tapas with id (\\w+) to the basket with id (\\d+)")
+  public void theUserAddsFiveTapasWithIdTreeToBasketWithIdOne(long tapasQuantity, String tapasId, int basketId) {
+    userBasketManagement.addTapasOrderInBasket(basketId, new TapasOrder(tapasId, tapasQuantity));
+  }
+
+  @Then("^the total number of items in the basket with id (\\d+) equals (\\d+)$")
   public void theTotalNumberOfItemsInTheBasketWithIdEquals(int basketId, int totalNumber) {
     assertThat(userBasketManagement.retrieveListOfAllTapasOrdersInBasket(basketId).stream()
         .map(TapasOrder::getAmount)
         .reduce(0L, Long::sum))
         .isEqualTo(totalNumber);
+  }
+
+  @And("^the total number of items with id (\\w+) in the basket with id (\\d+) equals (\\d+)$")
+  public void theTotalNumberOfItemWithIdInTheBasketWithIdEquals(String itemId, int basketId, int totalNumber) {
+    assertThat(userBasketManagement.retrieveListOfAllTapasOrdersInBasket(basketId).stream()
+        .filter(item -> item.getTapasId().equals(itemId))
+        .mapToLong(TapasOrder::getAmount)
+        .sum()).isEqualTo(totalNumber);
   }
 
   @After
