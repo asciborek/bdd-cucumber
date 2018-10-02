@@ -1,6 +1,7 @@
 package be.faros.testing.tapasapp.featuretests;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import be.faros.testing.tapasapp.BaseCucumberTest;
 import be.faros.testing.tapasapp.store.domain.usecases.dto.TapasOrder;
@@ -9,6 +10,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.math.BigDecimal;
+import org.junit.Assert;
 
 /**
  * TODO 03 (Let's read: Our Steps Definitions File)
@@ -44,6 +46,11 @@ public class BasketCucumberTest extends BaseCucumberTest {
         .filter(item -> item.getTapasId().equals(itemId))
         .mapToLong(TapasOrder::getAmount)
         .sum()).isEqualTo(totalNumber);
+  }
+
+  @Then("^the total price of items in the basket with id (\\d+) equals ([\\d\\.]*)$")
+  public void theTotalPriceOfItemsInTheBasketWithIdEquals(int basketId, BigDecimal totalPrice) {
+    assertEquals(totalPrice, userBasketManagement.calculateCostForBasket(basketId));
   }
 
   @After

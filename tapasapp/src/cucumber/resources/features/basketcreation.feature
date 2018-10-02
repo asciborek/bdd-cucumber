@@ -29,7 +29,12 @@ Feature: A new empty basket can be created and filled with Tapas
     Then the total number of items in the basket with id 1 equals 10
 
   # TODO 09 (EXTRA) Create a scenario where you add a couple of Tapas to the Basket and Calculate the Total Cost of it
-  #Scenario: Client can Calculate a Total Cost for all the Tapas in his Basket
+  Scenario: Client can Calculate a Total Cost for all the Tapas in his Basket
+    When the user creates a new Basket
+    And the user adds 1 tapas with id 0 to the basket with id 1
+    And the user adds 3 tapas with id 1 to the basket with id 1
+    And the user adds 2 tapas with id 2 to the basket with id 1
+    Then the total price of items in the basket with id 1 equals 16.5
 
   # TODO 10 (EXTRA) Finally let's try to add a scenario where we add and remove several Tapas and validate the total number of Tapas in the Basket and costs in between
   # Hint: You can add a new "When" after a "Then" to do intermittent validations
